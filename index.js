@@ -1,3 +1,4 @@
+const { render } = require("ejs");
 const express = require("express");
 const app = express();
 const port = 3000;
@@ -27,7 +28,21 @@ app.post("/register", (req, res) => {
     password: password,
   });
   console.log(users);
-  res.redirect("/register");
+  res.redirect("/tampilkan-user");
+});
+
+app.get("/jumlah-user", (req, res) => {
+  res.send(`Jumlah User ${users.length}`);
+});
+
+app.get("/tampilkan-user-json", (req, res) => {
+  res.json(users);
+});
+
+app.get("/tampilkan-user", (req, res) => {
+  res.render("users", {
+    users,
+  });
 });
 
 app.get("/salam", (req, res) => {
